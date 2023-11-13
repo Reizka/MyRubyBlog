@@ -87,7 +87,7 @@ bower.json
 
 # Ignore node_modules
 node_modules/
-
+git 
 # Ignore precompiled javascript packs
 /public/packs
 /public/packs-test
