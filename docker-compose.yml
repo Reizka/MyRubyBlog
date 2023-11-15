@@ -8,12 +8,5 @@ services:
       - sqlite-data:/myapp/db
     ports:
       - "3000:3000"
-
-  nodejs:
-    image: node:20.9.0 # Use the desired Node.js version
-    working_dir: /myapp
-    volumes:
-      - .:/myapp
-
 volumes:
   sqlite-data:
