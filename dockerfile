@@ -1,6 +1,10 @@
 # Use an official Ruby runtime as a parent image
 FROM ruby:3.2.2
 
+# Install Node.js and npm
+RUN curl -sL https://deb.nodesource.com/setup_20.9.0 | bash -
+RUN apt-get install -y nodejs
+
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
