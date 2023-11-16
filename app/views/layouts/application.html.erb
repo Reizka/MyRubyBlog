@@ -12,14 +12,14 @@
   </head>
 
   <body>
-   
-  <header>
-  <%= render "layouts/alerts" %>
-  </header>
-    <main>
-     
+
+    <header>
+    <%= render "layouts/alerts" %>
+    </header>
+  <%=render 'layouts/navbar'%>
+    <main class="bg-sky-500">
        <%= yield %>
     </main>
-    
+
   </body>
 </html>
