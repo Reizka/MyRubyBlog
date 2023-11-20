@@ -1,10 +1,5 @@
-<h1><%= @article.title %></h1>
 
-<p><%= @article.body %></p>
-
-<p>posted by <%= @article.user.email %><p>
-
-<p><%= @article.status%></p>
+<%= render @article %>
 
 <ul>
   <li><%= link_to "Edit", edit_article_path(@article) %></li>
@@ -19,4 +14,5 @@
 <%= render @article.comments %>
 <br/>
 <h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+<%= render 'comments/form', article:@article, comment:@article.comments.build %>
+<br/>

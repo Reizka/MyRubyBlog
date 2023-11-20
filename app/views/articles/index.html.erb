@@ -1,17 +1,20 @@
+<div class="flex flex-col items-center"> 
+  <h1 class="text-3xl font-bold underline text-center my-4">Articles</h1>
+  <p class="text-sm mb-4">Our blog has <%= Article.public_count %> articles and counting!</p>
 
-<h1 class="text-3xl font-bold underline">Articles2</h1>
-
-Our blog has <%= Article.public_count %> articles and counting!
-
-<ul>
-  <% @articles.each do |article| %>
-    <% unless article.archived? %>
-      <li>
-        <%= link_to article.title, article %>
-      </li>
+  <div class="grid grid-cols-4 gap-4 p-4 border border-gray-300 rounded w-full">
+    <% @articles.each do |article| %>
+      <% unless article.archived? %>
+        <div class="border p-2 rounded w-52 h-52 flex justify-center items-center">
+          <%= link_to article.title, article %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </div>
 
-
-<%= link_to "New Article", new_article_path %>
+  <div class="w-full flex justify-start mt-4">
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+      <%= link_to "New Article", new_article_path %>
+    </button>
+  </div>
+</div>

@@ -18,14 +18,29 @@
 
   <% if current_user == comment.user%>
 
-  <p>
-    <%= link_to "Remove", [comment.article, comment], data: {
+  <div>
+    <%= link_to "Delete", [comment.article, comment], data: {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
                 } %>
 
-    <%= link_to "Edit", nil , remote: true %>
-  </p>
+    <%= link_to "Edit", 
+    nil , 
+    remote: true, 
+    class:"", 
+    data:{ 
+      controller:"comments" , 
+      action:"comments#toggleForm",
+      comments_form_param:"edit-form-#{comment.id}",
+      comments_body_param:"comment-body-#{comment.id}",
+      } %>
+  </div>
 
-  <%end%>
+   <%end%>
+
+<div id="edit-form-<%= comment.id%>" class="d-none"> 
+  <h2>Edit a comment:</h2>
+  <%= render 'comments/form', article:@article, comment:comment %>
+</div>
+ 
 <% end %>
