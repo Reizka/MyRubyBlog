@@ -1,20 +1,22 @@
-<%= form_with model: [ @article, comment] do |form| %>
-  <p>
-    <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
-  </p>
+<div class="card mb-3">
+<%= form_with model: [@article, comment] do |form| %>
+  <div class="form-group m-4">
+    <%= form.label :commenter, class: 'form-label' %>
+    <%= form.text_field :commenter, class: 'form-control' %>
+  </div>
   
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
+   <div class="form-group m-4">
+    <%= form.label :body, class: 'form-label' %>
+    <%= form.text_area :body, class: 'form-control' %>
+  </div>
   
-  <p>
-  <%= form.label :status %><br>
-  <%= form.select :status, Visible::VALID_STATUSES, selected: 'public' %>
-</p>
+  <div class="form-group m-4">
+    <%= form.label :status, class: 'form-label' %>
+    <%= form.select :status, Visible::VALID_STATUSES, { selected: 'public' }, { class: 'form-select' } %>
+  </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
 <% end %>
+</div>

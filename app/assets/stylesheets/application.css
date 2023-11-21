@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+ .index-card-link {
+    color: black; /* Ensures text is black */
+  }
+  
+  .index-card-link:hover, .index-card-link:active {
+    text-decoration: none; /* Removes underline on hover and click */
+    opacity: 0.8; /* Slight fade effect on hover */
+  }
+  
+  /* Alternatively, you could use a box shadow or border change for hover effect */
+  .index-card-link:hover .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Example box shadow effect */
+  }
+
+/**USED IN VIEWS/ARTICLE/_article*/
+  .title-underline {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .title-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+    bottom: -5px;
+    left: 0;
+  }

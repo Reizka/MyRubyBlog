@@ -1,46 +1,45 @@
 <% unless comment.archived? %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.user.email %>
-  </p>
-  
-  <% if (comment.updated_at-comment.created_at) > 1 %>
-  <span> edited <%= time_ago_in_words(comment.updated_at) %> ago</span>
-  <%else%>
-  <span> posted <%= time_ago_in_words(comment.created_at) %> ago</span>
-  <%end%>
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-  </p>
+  <div class="card mb-3">
+    <div class="card-body">
+      <p>
+        <strong>Commenter:</strong>
+        <%= comment.user.email %>
+      </p>
 
-  
+      <p>
+        <% if (comment.updated_at - comment.created_at) > 1 %>
+          <span class="text-muted">Edited <%= time_ago_in_words(comment.updated_at) %> ago</span>
+        <% else %>
+          <span class="text-muted">Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
+        <% end %>
+      </p>
 
-  <% if current_user == comment.user%>
+      <p>
+        <strong>Comment:</strong>
+        <%= comment.body %>
+      </p>
 
-  <div>
-    <%= link_to "Delete", [comment.article, comment], data: {
-                  turbo_method: :delete,
-                  turbo_confirm: "Are you sure?"
-                } %>
+      <% if current_user == comment.user %>
+        <div class="mt-2">
+          <%= link_to "Delete", [comment.article, comment], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
 
-    <%= link_to "Edit", 
-    nil , 
-    remote: true, 
-    class:"", 
-    data:{ 
-      controller:"comments" , 
-      action:"comments#toggleForm",
-      comments_form_param:"edit-form-#{comment.id}",
-      comments_body_param:"comment-body-#{comment.id}",
-      } %>
+          <%= link_to "Edit", 
+            nil, 
+            remote: true, 
+            class: "btn btn-secondary btn-sm ms-2", 
+            data: { 
+              controller: "comments", 
+              action: "comments#toggleForm",
+              comments_form_param: "edit-form-#{comment.id}",
+              comments_body_param: "comment-body-#{comment.id}"
+            } %>
+        </div>
+
+        <div id="edit-form-<%= comment.id %>" class="d-none mt-3">
+          <h2>Edit a comment:</h2>
+          <%= render 'comments/form', article: @article, comment: comment %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-   <%end%>
-
-<div id="edit-form-<%= comment.id%>" class="d-none"> 
-  <h2>Edit a comment:</h2>
-  <%= render 'comments/form', article:@article, comment:comment %>
-</div>
- 
 <% end %>
