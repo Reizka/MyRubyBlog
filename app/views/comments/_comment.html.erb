@@ -16,23 +16,25 @@
 
       <p>
         <strong>Comment:</strong>
-        <%= comment.body %>
+        <%= sanitize comment.body %>
       </p>
 
       <% if current_user == comment.user %>
-        <div class="mt-2">
-          <%= link_to "Delete", [comment.article, comment], method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+        <div class="btn-group float-end">
 
-          <%= link_to "Edit", 
-            nil, 
-            remote: true, 
-            class: "btn btn-secondary btn-sm ms-2", 
-            data: { 
-              controller: "comments", 
-              action: "comments#toggleForm",
-              comments_form_param: "edit-form-#{comment.id}",
-              comments_body_param: "comment-body-#{comment.id}"
-            } %>
+
+        
+
+        <%= link_to "Edit", nil, remote: true, class:"btn btn-warning",
+          data: {
+            controller: "comments",
+            action: "comments#toggleForm",
+            comments_form_param: "edit-form-#{comment.id}",
+            comments_body_param: "comment-body-#{comment.id}",
+            comments_edit_param: "edit-button-#{comment.id}"
+          },
+          id: "edit-button-#{comment.id}" %>
+          <%= button_to "Delete", [comment.article, comment], class:"btn btn-danger", method: :delete %>
         </div>
 
         <div id="edit-form-<%= comment.id %>" class="d-none mt-3">

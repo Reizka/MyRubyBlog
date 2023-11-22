@@ -5,7 +5,9 @@
   <div class="mb-3">
     <ul class="list-inline">
       <li class="list-inline-item"><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary btn-sm" %></li>
-      <li class="list-inline-item"><%= link_to "Destroy", article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %></li>
+      <li class="list-inline-item"><%= link_to "Destroy", article_path(@article), data: {
+                    turbo_method: :delete
+                  } , class: "btn btn-danger btn-sm" %></li>
     </ul>
   </div>
 

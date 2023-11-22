@@ -43,3 +43,9 @@
     bottom: -5px;
     left: 0;
   }
+
+  /** for hadnling the comment and article rich text**/
+  .rich-text img {
+    max-width: 100%;
+    height: auto;
+}
