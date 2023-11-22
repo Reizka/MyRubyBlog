@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-User.create(email:"test@test.com", password:"password", password_confirmation:"password")
+User.create(email:"test@test.com", username:"bob", password:"password", password_confirmation:"password")
 
 10.times do |x|
   Article.create(title:"Title#{x+1}", body:"#{x} lorem ipsum dorem....", status:"public", user_id: User.first.id)

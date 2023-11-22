@@ -7,4 +7,7 @@ class Article < ApplicationRecord
   validates :body, presence: true, length: { minimum: 10 }
 
   belongs_to :user
+
+  has_noticed_notifications model_name: 'Notification'
+  has_many :notifications, through: :user, dependent: :destroy
 end

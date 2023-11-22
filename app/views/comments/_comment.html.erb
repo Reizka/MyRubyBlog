@@ -1,18 +1,47 @@
 <% unless comment.archived? %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-  </p>
+  <div class="card mb-3">
+    <div class="card-body">
+      <p>
+        <strong>Commenter:</strong>
+        <%= comment.user.email %>
+      </p>
 
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-  </p>
+      <p>
+        <% if (comment.updated_at - comment.created_at) > 1 %>
+          <span class="text-muted">Edited <%= time_ago_in_words(comment.updated_at) %> ago</span>
+        <% else %>
+          <span class="text-muted">Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
+        <% end %>
+      </p>
 
-  <p>
-    <%= link_to "Destroy Comment", [comment.article, comment], data: {
-                  turbo_method: :delete,
-                  turbo_confirm: "Are you sure?"
-                } %>
-  </p>
+      <p>
+        <strong>Comment:</strong>
+        <%= sanitize comment.body %>
+      </p>
+
+      <% if current_user == comment.user %>
+        <div class="btn-group float-end">
+
+
+        
+
+        <%= link_to "Edit", nil, remote: true, class:"btn btn-warning",
+          data: {
+            controller: "comments",
+            action: "comments#toggleForm",
+            comments_form_param: "edit-form-#{comment.id}",
+            comments_body_param: "comment-body-#{comment.id}",
+            comments_edit_param: "edit-button-#{comment.id}"
+          },
+          id: "edit-button-#{comment.id}" %>
+          <%= button_to "Delete", [comment.article, comment], class:"btn btn-danger", method: :delete %>
+        </div>
+
+        <div id="edit-form-<%= comment.id %>" class="d-none mt-3">
+          <h2>Edit a comment:</h2>
+          <%= render 'comments/form', article: @article, comment: comment %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>

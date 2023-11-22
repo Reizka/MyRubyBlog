@@ -1,17 +1,43 @@
 
-<h1 class="text-3xl font-bold underline">Articles2</h1>
+<h1 class="text-3xl font-bold underline text-center my-4">Articles</h1>
+<p class="text-sm mb-4 text-center">Our blog has <%= Article.public_count %> articles and counting!</p>
 
-Our blog has <%= Article.public_count %> articles and counting!
 
-<ul>
-  <% @articles.each do |article| %>
-    <% unless article.archived? %>
-      <li>
-        <%= link_to article.title, article %>
-      </li>
+
+
+<div class="text-center my-4"> <!-- Center the button and add margin -->
+  <button class="btn btn-primary" style="width: 20rem;"> <!-- Add Bootstrap button class for styling -->
+    <%= link_to "New Article", new_article_path, class: "text-white" %> <!-- Ensure link is styled as text -->
+  </button>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+  
+
+
+
+<div class="container">
+  <div class="row">
+    <% @articles.each do |article| %>
+      <% unless article.archived? %>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-3"> <!-- Responsive column sizes -->
+          <%= link_to article, class: "text-dark index-card-link", style: "text-decoration: none;" do %>
+            <div class="card h-100"> <!-- Removed fixed width, added h-100 for equal height -->
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"><%= article.title %></h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </div>
+</div>
 
 
-<%= link_to "New Article", new_article_path %>

@@ -1,20 +1,19 @@
-<h1><%= @article.title %></h1>
 
-<p><%= @article.body %></p>
+<%= render @article %>
 
-<p>posted by <%= @article.user.email %><p>
+<div class="container mt-4">
+  <div class="mb-3">
+    <ul class="list-inline">
+      <li class="list-inline-item"><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary btn-sm" %></li>
+      <li class="list-inline-item"><%= link_to "Destroy", article_path(@article), data: {
+                    turbo_method: :delete
+                  } , class: "btn btn-danger btn-sm" %></li>
+    </ul>
+  </div>
 
-<p><%= @article.status%></p>
+  <h2 class="mb-3">Comments</h2>
+  <%= render @article.comments %>
 
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-    <li><%= link_to "Destroy", article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
-<h2>Comments</h2>
-<%= render @article.comments %>
-
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+  <h2 class="mt-4 mb-3">Add a comment:</h2>
+  <%= render 'comments/form', article: @article, comment: @article.comments.build %>
+</div>
