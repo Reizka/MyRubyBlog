@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
+  get 'search/index', to: 'search#index '
+  
+  get 'users/profile'
+  
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+
+  get '/u/:id', to: 'users#profile', as: 'user'
+
   root "articles#index"
+  
   resources :articles
 
   resources :articles do
