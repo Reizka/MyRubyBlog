@@ -1,6 +1,7 @@
 {
-    
-    "[ruby]": {
-        "editor.formatOnSave": true
-      },
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.erb": "erb"
+  },
+  "rufo.useBundler": false,
 }
