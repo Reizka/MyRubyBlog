@@ -1,2 +1,22 @@
-<h1>Search#index</h1>
+<h1 class="text-center"><%= pluralize(@articles.count, "Result") %></h1>
 <p>Find me in app/views/search/index.html.erb</p>
+<%= render 'search/form' %>
+<div class="container">
+  <table class="table table-dark table-stripped">
+    <thead>
+      <tr>
+        <th><%= sort_link(@query, :title,"Title", default_order: :asc) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article|%>
+        <tr>
+          <td><%= link_to article.title, article %></td>
+          <!-- to_plain_text is due to rich text used as the body of the article -->
+          <td><%= article.body.to_plain_text.truncate_words(25) %></td>
+          <td><%= article.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

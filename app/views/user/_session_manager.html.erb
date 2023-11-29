@@ -1,10 +1,10 @@
 <% if current_user %>
- <li class="nav-item dropdown">
-     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <%= current_user.username %>
     </a>
     <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-      <li><%= link_to "New Article", new_article_path, class:"dropdown-item" %>
+      <li><%= link_to "Admin", admin_path, class:"dropdown-item" if current_user.admin? %>
         <li><a class="dropdown-item" href="#">Action</a></li>
         <li><%= link_to "Edit Account", edit_user_registration_path, class:"dropdown-item" %></li>
         <li><hr class="dropdown-divider"></li>
@@ -19,5 +19,3 @@
       <%= link_to "Login", new_user_session_path, class:'nav-link'%>
     </li>
   <% end %>
-
-
