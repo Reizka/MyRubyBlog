@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 
   before_action :authenticate_user!, except: %i[show index]
+  
   def index
     @articles = Article.all
   end
@@ -48,6 +49,16 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def set_article
+    @article = Article.find(params[:id])
+
+     # If an old id or a numeric id was used to find the record, then
+    # the request slug will not match the current slug, and we should do
+    # a 301 redirect to the new path
+    redirect_to @article, status: :moved_permanently if params[:id] != @article.slug
+  end
+
   def article_params
     params.require(:article).permit(:title, :body, :status)
   end

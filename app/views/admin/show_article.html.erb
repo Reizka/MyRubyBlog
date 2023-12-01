@@ -3,8 +3,32 @@
   <%= render "admin/nav_links"%>
   <div class="text-center mt-5">
     <div class="btn-group">
-      <p><%= @article.title %> </p>
+      <%= link_to "Edit", edit_article_path(@article), class:"btn btn-warning"%>
       <%= button_to "Delete", @article, method: :delete, data:{confirm:"Are you sure?"}, class: "btn btn-danger"%>
     </div>
+  </div>
+  <div class="row  mt-1">
+    <strong>Title:</strong><%= @article.title%>
+  </div>
+  <div class="row  mt-1">
+    <strong>Views:</strong>
+    <p>not implemented</p>
+  </div>
+  <div class="row  mt-1">
+    <strong>Author:</strong>
+    <%= "#{@article.user.email} | #{@article.user.username} | "%>
+  </div>
+  <div class="row  mt-1">
+    <strong>Body:</strong>
+    <%= @article.body%>
+  </div>
+  <div class="row  mt-1">
+    <strong><%= pluralize(@article.comments.count, "Comment")%></strong>
+    <% @article.comments.each do |comment|%>
+      <div class="row  mt-1">
+        <%= comment.user.username%>
+        <%= sanitize comment.body%>
+      </div>
+    <%end%>
   </div>
 </div>

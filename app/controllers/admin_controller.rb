@@ -12,7 +12,7 @@ class AdminController < ApplicationController
   def users
   end
 
-  def show_articles
+  def show_article
     @article = Article.includes(:user, :comments).find(params[:id])
   end
 end

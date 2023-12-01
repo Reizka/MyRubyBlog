@@ -1,4 +1,8 @@
 class Article < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: %i[slugged history finders]
+
+
   include Visible
 
   validates :title, presence: true
@@ -10,7 +14,13 @@ class Article < ApplicationRecord
   has_one :content, class_name: 'ActionText::RichText',as: :record, dependent: :destroy
 
   has_noticed_notifications model_name: 'Notification'
-  has_many :notifications, through: :user, dependent: :destroy
+  has_many :notifications, through: :user
+
+  
+
+  def should_generate_new_friendly_id?
+    title_changed? || slug.blank?
+  end
 
   def self.ransackable_attributes(auth_object = nil)
     ["body", "title"]
