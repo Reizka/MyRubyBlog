@@ -1,2 +1,24 @@
-<h1>Admin#posts</h1>
-<p>Find me in app/views/admin/posts.html.erb</p>
+<div class="container">
+  <h1 class="text-center"> Administrator </h1>
+  <%= render "admin/nav_links"%>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Article</th>
+        <th scope="col">Author</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @article.each do |article|%>
+        <tr>
+          <th scope="row"><%= article.id%></th>
+          <td><%= link_to article.title.truncate(15), admin_article_path(article)%></td>
+          <td><%= article.user.username%></td>
+          <td><%= pluralize(article.comments.size, "Comment")%></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

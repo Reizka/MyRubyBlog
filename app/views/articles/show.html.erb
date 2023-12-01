@@ -1,6 +1,4 @@
-
 <%= render @article %>
-
 <div class="container mt-4">
   <div class="mb-3">
     <ul class="list-inline">
@@ -10,10 +8,8 @@
                   } , class: "btn btn-danger btn-sm" %></li>
     </ul>
   </div>
-
   <h2 class="mb-3">Comments</h2>
   <%= render @article.comments %>
-
   <h2 class="mt-4 mb-3">Add a comment:</h2>
   <%= render 'comments/form', article: @article, comment: @article.comments.build %>
 </div>

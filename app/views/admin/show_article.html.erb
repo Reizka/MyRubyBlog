@@ -1,0 +1,10 @@
+<div class="container">
+  <h1 class="text-center"> Admin Dashboard </h1>
+  <%= render "admin/nav_links"%>
+  <div class="text-center mt-5">
+    <div class="btn-group">
+      <p><%= @article.title %> </p>
+      <%= button_to "Delete", @article, method: :delete, data:{confirm:"Are you sure?"}, class: "btn btn-danger"%>
+    </div>
+  </div>
+</div>
