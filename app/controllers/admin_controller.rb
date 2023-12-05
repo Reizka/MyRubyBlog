@@ -3,7 +3,7 @@ class AdminController < ApplicationController
   end
 
   def articles
-    @article = Article.all.includes(:user, :comments)
+    @article = Article.all.includes(:user)
   end
 
   def comments

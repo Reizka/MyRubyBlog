@@ -2,3 +2,12 @@
 #   record: name_of_fixture (ClassOfFixture)
 #   name: content
 #   body: <p>In a <i>million</i> stars!</p>
+body_for_testArticleOne:
+  name: body
+  body: <div>MyText</div> # Your rich text content
+  record: testArticleOne (Article)
+
+body_for_testArticleTwo:
+  name: body
+  body: <div>MyText</div> # Your rich text content
+  record: testArticleTwo (Article)
