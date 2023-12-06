@@ -70,9 +70,16 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
+# Authentication flow
 gem "devise"
-
+# Notification flow
 gem "noticed", "~> 1.6"
-
+# searchbar
 gem "ransack", "~> 4.1"
+# convert url to readable strings
+gem "friendly_id", "~> 5.5"
+# performance optimization
+gem "bullet", "~> 7.1"
+
+
+gem "activerecord-import", "~> 1.5"

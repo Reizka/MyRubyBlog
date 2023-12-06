@@ -5,7 +5,6 @@
         <div class="card shadow" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
             <%= form_with model: article do |form| %>
-              
               <!-- Title Field -->
               <div class="form-outline mb-4">
                 <%= form.label :title, class: 'form-label' %>
@@ -14,27 +13,23 @@
                   <div class="alert alert-danger mt-2"><%= message %></div>
                 <% end %>
               </div>
-
               <!-- Body Field -->
               <div class="form-outline mb-4">
                 <%= form.label :body, class: 'form-label' %>
-                <%= form.text_area :body, class: 'form-control', rows: 3 %>
+                <%= form.rich_text_area :body, class: 'form-control', rows: 3 %>
                 <% article.errors.full_messages_for(:body).each do |message| %>
                   <div class="alert alert-danger mt-2"><%= message %></div>
                 <% end %>
               </div>
-
               <!-- Status Select -->
               <div class="form-outline mb-4">
                 <%= form.label :status, class: 'form-label' %>
                 <%= form.select :status, Visible::VALID_STATUSES, {selected: article.status || 'public'}, {class: 'form-select'} %>
               </div>
-
               <!-- Submit Button -->
               <div class="form-outline">
                 <%= form.submit class: 'btn btn-primary btn-block' %>
               </div>
-
             <% end %>
           </div>
         </div>

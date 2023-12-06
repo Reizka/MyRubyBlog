@@ -6,9 +6,46 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+User.create(
+  email:"renny@test.com", 
+  username:"renny", 
+  password:"password", 
+  password_confirmation:"password",
+  role: User.roles[:admin]
+  )
+  
+User.create(
+  email:"test@test.com", 
+  username:"bob", 
+  password:"password", 
+  password_confirmation:"password"
+  )
 
-User.create(email:"test@test.com", username:"bob", password:"password", password_confirmation:"password")
+articles = []
+comments = []
 
-10.times do |x|
-  Article.create(title:"Title#{x+1}", body:"#{x} lorem ipsum dorem....", status:"public", user_id: User.first.id)
+elapsed_time = Benchmark.measure do
+  1000.times do |x|
+    puts "Creating article #{x+1}"
+     article = Article.new(
+      title:"Title #{x+1}", 
+      body:"#{x} lorem ipsum dorem....", 
+      status:"public", 
+      user_id: User.first.id)
+      articles.push(article)
+
+      10.times do |y|
+        puts "Creating comment #{y+1} for article #{x+1} out of 100"
+        comment = article.comments.new(
+          body:"#{y} Comment ipsum dorem....", 
+          status:"public", 
+          user_id: User.second.id)
+        comments.push(comment)
+      end
+  end
 end
+#uses gem actriverecord-import
+Article.import(articles)
+Comment.import(comments)
+
+puts "created #{articles.count} articles and #{comments.count} comments in #{elapsed_time.real} seconds"
