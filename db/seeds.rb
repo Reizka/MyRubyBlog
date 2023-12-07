@@ -23,7 +23,7 @@ User.create(
 
 articles = []
 comments = []
-
+#TODO use faker gem to generate random data ... look into faker gem
 elapsed_time = Benchmark.measure do
   1000.times do |x|
     puts "Creating article #{x+1}"
@@ -44,7 +44,7 @@ elapsed_time = Benchmark.measure do
       end
   end
 end
-#uses gem actriverecord-import
+#uses gem actriverecord-import only works with postgresql
 Article.import(articles)
 Comment.import(comments)
 
