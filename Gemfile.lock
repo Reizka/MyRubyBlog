@@ -100,6 +100,10 @@ GEM
       responders
       warden (~> 1.2.3)
     domain_name (0.6.20231109)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     ffi (1.16.3)
     ffi (1.16.3-x64-mingw-ucrt)
@@ -168,6 +172,8 @@ GEM
       http (>= 4.0.0)
       rails (>= 5.2.0)
     orm_adapter (0.5.0)
+    pg (1.5.4)
+    pg (1.5.4-x64-mingw-ucrt)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -227,8 +233,6 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.6.2-x64-mingw-ucrt)
-    sqlite3 (1.6.2-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     thor (1.2.1)
@@ -272,17 +276,18 @@ DEPENDENCIES
   capybara
   debug
   devise
+  dotenv-rails
   friendly_id (~> 5.5)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
   noticed (~> 1.6)
+  pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
   ransack (~> 4.1)
   selenium-webdriver
   sprockets-rails
-  sqlite3 (~> 1.4)
   stimulus-rails
   turbo-rails
   tzinfo-data
