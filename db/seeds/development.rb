@@ -8,7 +8,8 @@
 
 User.create(
   email:"renny@test.com",
-  username:"renny",
+  first_name:"renny",
+  last_name:"test",
   password:"password",
   password_confirmation:"password",
   role: User.roles[:admin]
@@ -16,16 +17,34 @@ User.create(
 
 User.create(
   email:"test@test.com",
-  username:"bob",
+  first_name:"bob",
+  last_name:"test2",
   password:"password",
   password_confirmation:"password"
   )
+
+
+Address.first_or_create!(
+  street:"1234 test st",
+  city:"test city",
+  postcode:"12345",
+  country:"test country",
+  user: User.first
+)
+
+Address.first_or_create!(
+  street:"4321 test st",
+  city:"test city",
+  postcode:"54321",
+  country:"test country",
+  user: User.second
+)
 
 articles = []
 comments = []
 #TODO use faker gem to generate random data ... look into faker gem
 elapsed_time = Benchmark.measure do
-  1000.times do |x|
+  10.times do |x|
     puts "Creating article #{x+1}"
      article = Article.new(
       title:"Title #{x+1}",
@@ -48,4 +67,4 @@ end
 Article.import(articles)
 Comment.import(comments)
 
-puts "created #{articles.count} articles and #{comments.count} comments in #{elapsed_time.real} seconds"
+puts "Seeded develompent DB #{articles.count} articles and #{comments.count} comments in #{elapsed_time.real} seconds"

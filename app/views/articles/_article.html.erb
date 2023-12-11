@@ -1,13 +1,10 @@
 <div class="container mt-4">
   <div class="border border-2 shadow-sm p-3 mb-5 bg-white rounded">
     <h1 class="mb-3 title-underline"><%= @article.title %></h1>
-
     <div class="mb-3">
       <p class="lead"><%= @article.body %></p>
     </div>
-
     <p class="mb-1 text-muted">Posted by <%= @article.user.email %></p>
-
     <p class="badge bg-secondary"><%= @article.status.capitalize %></p>
   </div>
 </div>
