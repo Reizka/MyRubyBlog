@@ -16,7 +16,7 @@
   </div>
   <div class="row  mt-1">
     <strong>Author:</strong>
-    <%= "#{@article.user.email} | #{@article.user.username} | "%>
+    <%= "#{@article.user.email} | #{@article.user.full_name} | "%>
   </div>
   <div class="row  mt-1">
     <strong>Body:</strong>
@@ -26,7 +26,7 @@
     <strong><%= pluralize(@article.comments.count, "Comment")%></strong>
     <% @article.comments.each do |comment|%>
       <div class="row  mt-1">
-        <%= comment.user.username%>
+        <%= comment.user.full_name%>
         <%= sanitize comment.body%>
       </div>
     <%end%>
