@@ -43,6 +43,12 @@ Address.first_or_create!(
 articles = []
 comments = []
 #TODO use faker gem to generate random data ... look into faker gem
+
+category = Category.first_or_create!(name:"Uncategorized", display_in_nav: true)
+Category.first_or_create!(name:"Category 1", display_in_nav: false)
+Category.first_or_create!(name:"Category 2", display_in_nav: true)
+Category.first_or_create!(name:"Category 3", display_in_nav: true)
+
 elapsed_time = Benchmark.measure do
   10.times do |x|
     puts "Creating article #{x+1}"
@@ -50,6 +56,7 @@ elapsed_time = Benchmark.measure do
       title:"Title #{x+1}",
       body:"#{x} lorem ipsum dorem....",
       status:"public",
+      category: category,
       user_id: User.first.id)
       articles.push(article)
 
