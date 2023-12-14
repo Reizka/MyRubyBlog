@@ -4,7 +4,7 @@
     <div class="mb-3">
       <p class="lead"><%= article.body %></p>
     </div>
-    <p class="mb-1 text-muted">Posted by <%= link_to article.user.full_name, user_profile_path(article.user) %></p>
+    <p class="mb-1 text-muted">Posted by <%= link_to article.user.full_name, user_path(article.user) %></p>
     <p class="badge bg-secondary"><%= article.status.capitalize %></p>
   </div>
 </div>
