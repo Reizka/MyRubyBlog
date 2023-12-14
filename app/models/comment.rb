@@ -13,6 +13,7 @@ class Comment < ApplicationRecord
   private
 
   def notify_recipient
+    return if article.user == user
     CommentNotification.with(comment: self, article: article).deliver_later(article.user)
   end
 
