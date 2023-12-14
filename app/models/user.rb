@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient, dependent: :destroy  # User can receive many notifications
   has_one :address, dependent: :destroy, inverse_of: :user, autosave: true  # User has one address, delete address if user is deleted
 
+ has_one_attached :avatar  # User has one avatar image
+
   # Enums for user roles
   enum role: [:user, :admin, :guest]
 
