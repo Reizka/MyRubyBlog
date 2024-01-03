@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   # Devise modules for authentication and account management
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -60,5 +61,6 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :user  # Set default role to 'user' if none is provided
   end
+
 
 end

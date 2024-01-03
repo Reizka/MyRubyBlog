@@ -1,3 +1,33 @@
-<h1> <%= @user.full_name %> </h1>
-<h6> </h6>
-<p> find me in app/views/users/profile.html.erb </p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-4">
+      <%= image_tag(@user.avatar, style:"width: 150px; height: 150px;, boder-radius: 100%") if @user.avatar.attached?%>
+    </div>
+    <h1> <%= @user.full_name %> </h1>
+    <h6>
+      <%= pluralize(@user.comments.size, "Comment") %>
+    </h6>
+    <p> find me in app/views/users/profile.html.erb </p>
+  </div>
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-10">
+      <% @articles.each do |article| %>
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5 class="card-tile">
+              <%= link_to article.title, article %>
+              <p class= "card-text">
+                <%= "#{time_ago_in_words(article.created_at)} ago" %>
+              </p>
+              <p class= "card-text">
+                <%= article.body.to_plain_text.truncate_words(100) %>
+              </p>
+            </h5>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

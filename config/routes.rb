@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :categories
+
   authenticated :user, ->(user) {user.admin?} do
     get 'admin', to:'admin#index'
     get 'admin/articles'
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
   get 'home', to: 'pages#home'
 
-  get '/u/:id', to: 'users#profile', as: 'user'
+  get '/user/:id', to: 'users#profile', as: 'user'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   root "articles#index"
 
   resources :articles
+
+  resources :categories
 
   resources :after_signup
 
