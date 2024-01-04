@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
 
   authenticated :user, ->(user) {user.admin?} do
     get 'admin', to:'admin#index'
@@ -14,10 +19,6 @@ Rails.application.routes.draw do
 
   get '/user/:id', to: 'users#profile', as: 'user'
 
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
 
   root "articles#index"
 

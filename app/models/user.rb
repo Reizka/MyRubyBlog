@@ -2,15 +2,26 @@ class User < ApplicationRecord
 
   # Devise modules for authentication and account management
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, :omniauth_providers => [:digitalocean, :saml, :google_oauth2, :openid_connect]
   # Relationships
   has_many :articles, dependent: :destroy  # User has many articles, delete articles if user is deleted
   has_many :comments, dependent: :destroy  # User has many comments, delete comments if user is deleted
   has_many :notifications, as: :recipient, dependent: :destroy  # User can receive many notifications
   has_one :address, dependent: :destroy, inverse_of: :user, autosave: true  # User has one address, delete address if user is deleted
 
- has_one_attached :avatar  # User has one avatar image
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.avatar = auth.info.image
+      #user.role = :user
+    end
+  end
+
+  has_one_attached :avatar  # User has one avatar image
 
   # Enums for user roles
   enum role: [:user, :admin, :guest]

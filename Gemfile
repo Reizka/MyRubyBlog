@@ -86,3 +86,14 @@ gem "bullet", "~> 7.1"
 gem "activerecord-import", "~> 1.5"
 
 gem "wicked", "~> 2.0"
+
+gem 'omniauth'
+
+gem 'omniauth-digitalocean'
+
+
+gem 'omniauth-saml'
+gem 'omniauth-oauth2'
+gem 'omniauth_openid_connect', '~> 0.7.1'
+gem "omniauth-rails_csrf_protection"
+gem 'omniauth-google-oauth2'
