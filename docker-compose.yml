@@ -1,26 +1,30 @@
 version: '3'
 services:
-  postgres-db:
+  db:
     image: postgres
+    environment:
+      POSTGRES_USER: renny
+      POSTGRES_PASSWORD: password
+      # POSTGRES_HOST and POSTGRES_PORT are not typically set here,
+      # as they are determined by the Docker service configuration.
+    ports:
+      - "5432:5432"  # Map the default PostgreSQL port to the same port on the host
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: user
-      POSTGRES_DB: demodb
-    ports:
-      - "5432:5432"
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "./bin/dev"
+    environment:
+      POSTGRES_USER: renny
+      POSTGRES_PW: password
+      POSTGRES_URL: db  # This should be the service name of your PostgreSQL service in Docker
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: demodb
+      POSTGRES_DB_TEST: demodb_test
+      POSTGRES_DB_PRD: demodb_prd
     volumes:
       - .:/myapp
     ports:
       - "3000:3000"
-    environment:
-      DB_HOST: postgres-db
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_NAME: demodb
     depends_on:
-      - postgres-db
+      - db
