@@ -1,30 +1,8 @@
 #!/usr/bin/env sh
 
-#if ! gem list foreman -i --silent; then
-#  echo "Installing foreman..."
-#  gem install foreman
-#fi
-
-#exec foreman start -f Procfile.dev "$@"
-
-
-# Check and install foreman if not present
 if ! gem list foreman -i --silent; then
   echo "Installing foreman..."
   gem install foreman
 fi
 
-# Start Docker Compose services
-echo "Starting Docker services..."
-docker-compose up -d
-
-# Drop and setup the database
-echo "Resetting the database..."
-docker-compose run web rails db:drop db:create db:migrate
-
-# Your additional Docker-related commands can go here
-# For example, to ensure the database is set up:
-# docker-compose run web rake db:create db:migrate
-
-# Start services with Foreman
 exec foreman start -f Procfile.dev "$@"
