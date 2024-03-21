@@ -5,20 +5,33 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- Ruby version
+  3.2.2
+- System dependencies
 
-* System dependencies
+- Configuration
 
-* Configuration
+- Database creation
+  PostgresSQL db
 
-* Database creation
+- Database initialization
+  #If setting up a new db
+  // POSTGRES_USER = renny
+  // POSTGRES_PASSWORD = password
+  // POSTGRES_DATABASE = demodb
+  // psql -U renny
+  //check everything is tip top
+- How to run the test suite
 
-* Database initialization
+- Services (job queues, cache servers, search engines, etc.)
 
-* How to run the test suite
+- Deployment instructions
+  rails db:drop (if first time in a while)
+  rails db:create (--"--)
 
-* Services (job queues, cache servers, search engines, etc.)
+  double check rails encrypted env files
+  EDITOR="code --wait" rails credentials:edit
 
-* Deployment instructions
-
-* ...
+  setup db
+  bin/rails db:migrate RAILS_ENV=development
+  rails db:seed
