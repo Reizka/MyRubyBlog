@@ -44,12 +44,19 @@ articles = []
 comments = []
 #TODO use faker gem to generate random data ... look into faker gem
 
+ # Create some tags
+ tags = ["Programming", "Ruby on Rails", "Web Development", "Database", "ActiveRecord"].map do |tag_name|
+  Tag.find_or_create_by(name: tag_name)
+end
+
 category = Category.first_or_create!(name:"Uncategorized", display_in_nav: true)
 Category.first_or_create!(name:"Category 1", display_in_nav: false)
 Category.first_or_create!(name:"Category 2", display_in_nav: true)
 Category.first_or_create!(name:"Category 3", display_in_nav: true)
 
 elapsed_time = Benchmark.measure do
+
+
   10.times do |x|
     puts "Creating article #{x+1}"
      article = Article.new(
@@ -73,5 +80,18 @@ end
 #uses gem actriverecord-import only works with postgresql
 Article.import(articles)
 Comment.import(comments)
+
+# Assuming `tags` is an array of Tag records that already exist in the database
+tags = Tag.all.to_a
+
+# Associate random tags with each imported article
+# Since `Article.import` doesn't return the imported objects with their new IDs,
+# you'll need to fetch them again or maintain their IDs in some way if necessary.
+Article.find_each do |article|
+  selected_tags = tags.sample(2) # Randomly pick 2 tags for each article
+
+  # Directly add the selected tags to the article
+  article.tags << selected_tags
+end
 
 puts "Seeded develompent DB #{articles.count} articles and #{comments.count} comments in #{elapsed_time.real} seconds"

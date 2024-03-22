@@ -12,7 +12,7 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_rich_text :body
   has_one :content, class_name: 'ActionText::RichText', as: :record, dependent: :destroy
-
+  has_and_belongs_to_many :tags
   has_noticed_notifications model_name: "Notification"
   has_many :notifications, through: :user
 
